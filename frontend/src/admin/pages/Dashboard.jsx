@@ -176,12 +176,12 @@ export default function Dashboard() {
             {/* Charts Row */}
             <div className="dashboard-charts-grid">
                 {/* Revenue Trend Line (Bar Chart) */}
-                <div style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.5rem' }}>
+                <div style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.5rem', width: '100%', boxSizing: 'border-box', minWidth: 0 }}>
                     <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem' }}>📈 Revenue Trend (Last 7 Days)</h3>
-                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.75rem', height: 160 }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem', height: 160, width: '100%', overflowX: 'auto', paddingBottom: '0.5rem' }}>
                         {last7Days.map((day, i) => (
-                            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
-                                <span style={{ fontSize: '0.65rem', color: '#888' }}>
+                            <div key={i} style={{ flex: 1, minWidth: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}>
+                                <span style={{ fontSize: '0.65rem', color: '#888', whiteSpace: 'nowrap' }}>
                                     {day.value > 0 ? `${day.value.toFixed(0)}৳` : ''}
                                 </span>
                                 <div style={{
@@ -200,7 +200,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Order Status Pie Chart */}
-                <div style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.5rem' }}>
+                <div style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.5rem', width: '100%', boxSizing: 'border-box', minWidth: 0 }}>
                     <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem' }}>📊 Order Status</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                         <div style={{
@@ -208,6 +208,7 @@ export default function Dashboard() {
                             background: pieGradient,
                             boxShadow: '0 0 30px rgba(236,72,153,0.1)',
                             position: 'relative',
+                            flexShrink: 0
                         }}>
                             <div style={{
                                 position: 'absolute', inset: '25%', borderRadius: '50%',
@@ -218,11 +219,11 @@ export default function Dashboard() {
                                 {totalForPie}
                             </div>
                         </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem', justifyContent: 'center' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 0.75rem', justifyContent: 'center', width: '100%' }}>
                             {Object.entries(statusCounts).map(([status, count]) => (
                                 <div key={status} style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: PIE_COLORS[status] }} />
-                                    <span style={{ fontSize: '0.7rem', color: '#888' }}>{status} ({count})</span>
+                                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: PIE_COLORS[status], flexShrink: 0 }} />
+                                    <span style={{ fontSize: '0.75rem', color: '#888' }}>{status} ({count})</span>
                                 </div>
                             ))}
                         </div>
@@ -234,16 +235,17 @@ export default function Dashboard() {
             {lowStock.length > 0 && (
                 <div style={{
                     background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.15)',
-                    borderRadius: 14, padding: '1.25rem', marginBottom: '2rem',
+                    borderRadius: 14, padding: '1.25rem', marginBottom: '2rem', width: '100%', boxSizing: 'border-box', minWidth: 0
                 }}>
                     <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ef4444', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <AlertTriangle size={18} /> Low Stock Alert ({lowStock.length} items)
                     </h3>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', maxWidth: '100%' }}>
                         {lowStock.map(p => (
                             <span key={p.$id} style={{
                                 padding: '0.35rem 0.75rem', borderRadius: 8, fontSize: '0.8rem',
                                 background: 'rgba(239,68,68,0.1)', color: '#fca5a5',
+                                maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
                             }}>
                                 {p.name} — <strong>{p.stock || 0} left</strong>
                             </span>

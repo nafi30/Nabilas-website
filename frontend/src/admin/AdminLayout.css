@@ -8,6 +8,10 @@
     background: #050505;
     color: #e5e5e5;
     font-family: 'Inter', system-ui, sans-serif;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 /* ---- Sidebar ---- */
@@ -183,6 +187,11 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-width: 0;
+    width: calc(100% - 270px);
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .admin__topbar {
@@ -196,6 +205,8 @@
     position: sticky;
     top: 0;
     z-index: 50;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin__menu-btn {
@@ -231,6 +242,10 @@
 .admin__content {
     flex: 1;
     padding: 2rem;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* ---- Overlay ---- */
@@ -245,9 +260,11 @@
 /* Stats Grid */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
     margin-bottom: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .stat-card {
@@ -614,27 +631,35 @@
 /* Responsive Grid Utilities */
 .dashboard-charts-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-detail-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-customer-detail-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-settings-grid {
     display: grid;
     grid-template-columns: 220px 1fr;
     gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-settings-sidebar {
@@ -647,7 +672,28 @@
    RESPONSIVE (TABLETS & MOBILE PHONES)
    ======================================== */
 
+@media (max-width: 1200px) {
+    .dashboard-charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 1024px) {
+    .admin__sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    }
+
+    .admin__sidebar.open {
+        transform: translateX(0);
+    }
+
+    .admin__main {
+        margin-left: 0;
+        width: 100%;
+    }
+
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
