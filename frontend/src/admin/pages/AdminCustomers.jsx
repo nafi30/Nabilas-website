@@ -127,7 +127,7 @@ export default function AdminCustomers() {
                                         {isExpanded && (
                                             <tr key={`${customer.$id}-detail`}>
                                                 <td colSpan="7" style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem' }}>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+                                                    <div className="admin-customer-detail-grid">
                                                         {/* Profile Info */}
                                                         <div>
                                                             <h4 style={{ fontSize: '0.8rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '1rem', fontWeight: 600 }}>

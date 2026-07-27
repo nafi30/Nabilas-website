@@ -116,7 +116,7 @@ export default function AdminOrders() {
                                     {expandedId === order.$id && (
                                         <tr key={`${order.$id}-detail`}>
                                             <td colSpan="7" style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem' }}>
-                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                                                <div className="admin-detail-grid">
                                                     <div>
                                                         <p style={{ fontSize: '0.75rem', color: '#666', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 600 }}>Shipping Details</p>
                                                         <p style={{ color: '#ccc', lineHeight: 1.6 }}>

@@ -84,9 +84,9 @@ export default function AdminSettings() {
                 <p style={{ color: '#666', fontSize: '0.85rem' }}>Manage your admin profile and store settings</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '1.5rem' }}>
+            <div className="admin-settings-grid">
                 {/* Settings Sidebar */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <div className="admin-settings-sidebar">
                     {sections.map(({ id, label, icon: Icon }) => (
                         <button
                             key={id}

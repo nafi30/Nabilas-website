@@ -174,7 +174,7 @@ export default function Dashboard() {
             </div>
 
             {/* Charts Row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+            <div className="dashboard-charts-grid">
                 {/* Revenue Trend Line (Bar Chart) */}
                 <div style={{ background: '#0f0f0f', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '1.5rem' }}>
                     <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem' }}>📈 Revenue Trend (Last 7 Days)</h3>
