@@ -43,7 +43,7 @@ export default function AdminLogin() {
         }
 
         if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
-            setError('Unauthorized email address.');
+            setError('Access denied. Please check your admin email.');
             setLoading(false);
             return;
         }
