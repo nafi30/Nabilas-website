@@ -29,7 +29,7 @@ export default function AdminLayout() {
 
     // Security: Only admin can access
     if (!user || user.email !== ADMIN_EMAIL) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/login" replace />;
     }
 
     const handleLogout = async () => {
