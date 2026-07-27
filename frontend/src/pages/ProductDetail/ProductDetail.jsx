@@ -5,6 +5,8 @@ import {
     Truck, Shield, RotateCcw, Share2, ChevronRight, ChevronLeft,
     Check, X
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../auth/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import ProductCard from '../../components/product/ProductCard';
@@ -25,6 +27,8 @@ export default function ProductDetail() {
     const [activeTab, setActiveTab] = useState('description');
     const [isZoomed, setIsZoomed] = useState(false);
     const galleryRef = useRef(null);
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
     const productImages = product?.images || (product?.image ? product.image.split(',') : []);
 
@@ -84,6 +88,10 @@ export default function ProductDetail() {
     };
 
     const handleAddToCart = () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
         const variant = {};
         if (selectedColor) variant.color = selectedColor;
         if (selectedSize) variant.size = selectedSize;

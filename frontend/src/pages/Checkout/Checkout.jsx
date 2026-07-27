@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     ChevronRight, Check, CreditCard, Truck,
@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../auth/AuthContext';
-import { databases, ID } from '../../lib/appwrite';
+import { databases, ID, Permission, Role } from '../../lib/appwrite';
 import './Checkout.css';
 
 const DB_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
@@ -18,6 +18,12 @@ export default function Checkout() {
     const { user } = useAuth();
     const [step, setStep] = useState(1);
     const [isProcessing, setIsProcessing] = useState(false);
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
 
     const [formData, setFormData] = useState({
         // Shipping
@@ -89,7 +95,11 @@ export default function Checkout() {
                         shippingCity: formData.city,
                         shippingZip: formData.zipCode,
                         paymentMethod: 'card'
-                    }
+                    },
+                    user ? [
+                        Permission.read(Role.user(user.$id)),
+                        Permission.update(Role.user(user.$id))
+                    ] : []
                 );
 
                 clearCart();

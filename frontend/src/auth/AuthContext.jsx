@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { account, databases, ID, Query } from '../lib/appwrite';
+import { account, databases, ID, Query, Permission, Role } from '../lib/appwrite';
 
 const AuthContext = createContext(null);
 
@@ -34,7 +34,11 @@ export function AuthProvider({ children }) {
                     DB_ID,
                     PROFILES_ID,
                     ID.unique(),
-                    { userId, phone: '', street: '', city: '', state: '', zip: '', country: '' }
+                    { userId, phone: '', street: '', city: '', state: '', zip: '', country: '' },
+                    [
+                        Permission.read(Role.user(userId)),
+                        Permission.update(Role.user(userId))
+                    ]
                 );
                 setProfile(newProfile);
                 return newProfile;

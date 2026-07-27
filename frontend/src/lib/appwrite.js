@@ -16,5 +16,5 @@ client
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
-export { ID, Query } from 'appwrite';
+export { ID, Query, Permission, Role } from 'appwrite';
 export default client;

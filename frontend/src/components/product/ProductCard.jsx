@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Heart, ShoppingCart, Eye, Star } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
+import { useAuth } from '../../auth/AuthContext';
 import './ProductCard.css';
 
 export default function ProductCard({ product, viewMode = 'grid' }) {
@@ -10,6 +11,8 @@ export default function ProductCard({ product, viewMode = 'grid' }) {
     const [imageLoaded, setImageLoaded] = useState(false);
     const { addToCart } = useCart();
     const { isInWishlist, toggleWishlist } = useWishlist();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
     const formatPrice = (price) => {
         return (
@@ -23,6 +26,10 @@ export default function ProductCard({ product, viewMode = 'grid' }) {
     const handleAddToCart = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (!user) {
+            navigate('/login');
+            return;
+        }
         addToCart(product, 1);
     };
 
