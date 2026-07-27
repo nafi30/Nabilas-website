@@ -12,7 +12,7 @@ import AdminCustomers from './pages/AdminCustomers';
 import AdminSettings from './pages/AdminSettings';
 import './AdminLayout.css';
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'namiranabilacreations@gmail.com').trim().toLowerCase();
 
 const navItems = [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -28,7 +28,7 @@ export default function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     // Security: Only admin can access
-    if (!user || user.email !== ADMIN_EMAIL) {
+    if (!user || user.email?.trim().toLowerCase() !== ADMIN_EMAIL) {
         return <Navigate to="/admin/login" replace />;
     }
 

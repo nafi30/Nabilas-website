@@ -17,11 +17,11 @@ export default function AdminLogin() {
 
     const { user, login, verifyMfa } = useAuth();
     const navigate = useNavigate();
-    const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+    const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'namiranabilacreations@gmail.com').trim().toLowerCase();
 
     // If already logged in as admin, instantly redirect to dashboard
     useEffect(() => {
-        if (user && user.email === ADMIN_EMAIL) {
+        if (user && user.email?.trim().toLowerCase() === ADMIN_EMAIL) {
             navigate('/admin');
         }
     }, [user, navigate, ADMIN_EMAIL]);
@@ -42,7 +42,7 @@ export default function AdminLogin() {
             return;
         }
 
-        if (email !== ADMIN_EMAIL) {
+        if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
             setError('Unauthorized email address.');
             setLoading(false);
             return;
