@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, ShoppingBag } from 'lucide-react';
 import { useAuth } from '../../auth/AuthContext';
@@ -14,8 +14,18 @@ export default function Auth() {
     const [mfaChallengeId, setMfaChallengeId] = useState(null);
     const [otp, setOtp] = useState('');
 
-    const { login, register, verifyMfa } = useAuth();
+    const { user, login, register, verifyMfa } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            if (user.email === import.meta.env.VITE_ADMIN_EMAIL) {
+                navigate('/admin');
+            } else {
+                navigate('/account');
+            }
+        }
+    }, [user, navigate]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
