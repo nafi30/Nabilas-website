@@ -84,6 +84,30 @@ export function AuthProvider({ children }) {
             await fetchOrders(userDetails.$id);
             return { success: true };
         } catch (err) {
+            if (err.type === 'user_more_factors_required') {
+                try {
+                    const challenge = await account.createMfaChallenge('email');
+                    return { success: true, requiresMfa: true, challengeId: challenge.$id };
+                } catch (mfaErr) {
+                    setError(mfaErr.message);
+                    return { success: false, message: mfaErr.message };
+                }
+            }
+            setError(err.message);
+            return { success: false, message: err.message };
+        }
+    };
+
+    const verifyMfa = async (challengeId, otp) => {
+        setError('');
+        try {
+            await account.updateMfaChallenge(challengeId, otp);
+            const userDetails = await account.get();
+            setUser(userDetails);
+            await fetchProfile(userDetails.$id);
+            await fetchOrders(userDetails.$id);
+            return { success: true };
+        } catch (err) {
             setError(err.message);
             return { success: false, message: err.message };
         }
@@ -141,6 +165,7 @@ export function AuthProvider({ children }) {
         loading,
         error,
         login,
+        verifyMfa,
         register,
         logout,
         updateProfile,

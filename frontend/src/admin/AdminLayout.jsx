@@ -23,15 +23,14 @@ const navItems = [
 ];
 
 export default function AdminLayout() {
-    const { user: authUser, logout } = useAuth();
-    const user = authUser || { name: 'Admin User', email: 'imrulnafii@gmail.com' };
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    // Security: Only admin can access (temporarily bypassed for preview)
-    // if (!user || user.email !== ADMIN_EMAIL) {
-    //     return <Navigate to="/" replace />;
-    // }
+    // Security: Only admin can access
+    if (!user || user.email !== ADMIN_EMAIL) {
+        return <Navigate to="/" replace />;
+    }
 
     const handleLogout = async () => {
         await logout();
