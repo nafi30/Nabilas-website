@@ -182,10 +182,10 @@ export default function Header() {
                         </form>
                     </div>
                     <nav className="header__mobile-nav">
-                        <Link to="/" className="header__mobile-link">Home</Link>
-                        <Link to="/products" className="header__mobile-link">All Products</Link>
-                        <Link to="/products?tag=bestseller" className="header__mobile-link">Deals</Link>
-                        <Link to="/about" className="header__mobile-link">About</Link>
+                        <Link to="/" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+                        <Link to="/products" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>All Products</Link>
+                        <Link to="/products?tag=bestseller" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Deals</Link>
+                        <Link to="/about" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
 
                         <div className="header__mobile-categories">
                             <p className="header__mobile-label">Categories</p>
@@ -203,7 +203,7 @@ export default function Header() {
                                     </button>
                                     {expandedMobileCat === cat.id && (
                                         <div className="header__mobile-subs">
-                                            <Link to={`/products?category=${cat.id}`} className="header__mobile-sub-link">
+                                            <Link to={`/products?category=${cat.id}`} className="header__mobile-sub-link" onClick={() => setIsMobileMenuOpen(false)}>
                                                 All {cat.name}
                                             </Link>
                                             {cat.subcategories.map(sub => (
@@ -211,6 +211,7 @@ export default function Header() {
                                                     key={sub.id}
                                                     to={`/products?category=${cat.id}&sub=${sub.id}`}
                                                     className="header__mobile-sub-link"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
                                                 >
                                                     {sub.name}
                                                 </Link>
@@ -219,6 +220,31 @@ export default function Header() {
                                     )}
                                 </div>
                             ))}
+                        </div>
+
+                        <div className="header__mobile-categories">
+                            <p className="header__mobile-label">Account</p>
+                            {isAuthenticated ? (
+                                <>
+                                    <Link to="/account" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>
+                                        <User size={18} /> My Account
+                                    </Link>
+                                    <Link to="/account" state={{ tab: 'orders' }} className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>
+                                        <Package size={18} /> My Orders
+                                    </Link>
+                                    <button 
+                                        className="header__mobile-link" 
+                                        onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                                        style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', color: '#ef4444' }}
+                                    >
+                                        <LogOut size={18} /> Sign Out
+                                    </button>
+                                </>
+                            ) : (
+                                <Link to="/login" className="header__mobile-link" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <User size={18} /> Sign In / Register
+                                </Link>
+                            )}
                         </div>
                     </nav>
                 </div>
