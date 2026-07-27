@@ -17,7 +17,7 @@ export default function AdminLogin() {
 
     const { user, login, verifyMfa } = useAuth();
     const navigate = useNavigate();
-    const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'namiranabilacreations@gmail.com').trim().toLowerCase();
+    const ADMIN_EMAIL = 'namiranabilacreations@gmail.com';
 
     // If already logged in as admin, instantly redirect to dashboard
     useEffect(() => {

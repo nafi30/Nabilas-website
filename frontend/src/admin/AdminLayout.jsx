@@ -12,7 +12,7 @@ import AdminCustomers from './pages/AdminCustomers';
 import AdminSettings from './pages/AdminSettings';
 import './AdminLayout.css';
 
-const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'namiranabilacreations@gmail.com').trim().toLowerCase();
+const ADMIN_EMAIL = 'namiranabilacreations@gmail.com';
 
 const navItems = [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
