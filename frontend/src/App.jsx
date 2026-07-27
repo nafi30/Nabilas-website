@@ -20,6 +20,7 @@ import Account from './pages/Account/Account';
 import Categories from './pages/Categories/Categories';
 import Migrate from './pages/Migrate';
 import AdminLayout from './admin/AdminLayout';
+import AdminLogin from './admin/pages/AdminLogin';
 
 // Styles
 import './index.css';
@@ -71,6 +72,7 @@ function App() {
               <Router>
                 <Routes>
                 {/* Admin Dashboard — No Header/Footer */}
+                <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/*" element={<AdminLayout />} />
 
                 {/* Main Store */}

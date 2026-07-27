@@ -19,11 +19,7 @@ export default function Auth() {
 
     useEffect(() => {
         if (user) {
-            if (user.email === import.meta.env.VITE_ADMIN_EMAIL) {
-                navigate('/admin');
-            } else {
-                navigate('/account');
-            }
+            navigate('/account');
         }
     }, [user, navigate]);
 
@@ -41,7 +37,7 @@ export default function Auth() {
             const result = await verifyMfa(mfaChallengeId, otp);
             setLoading(false);
             if (result.success) {
-                navigate('/admin');
+                navigate('/account');
             } else {
                 setFormError(result.message || 'Invalid verification code.');
             }
@@ -68,7 +64,7 @@ export default function Auth() {
         }
 
         if (result.success) {
-            navigate('/admin');
+            navigate('/account');
         } else {
             setFormError(result.message || 'Something went wrong. Please try again.');
         }
