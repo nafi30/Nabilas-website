@@ -1,0 +1,58 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensure main content pushes footer down */
+main {
+  flex: 1;
+}
+
+/* Smooth page transitions */
+main>.container {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection color */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+a,
+button {
+  transition: all var(--transition-fast);
+}
+
+/* Prevent horizontal scroll */
+html,
+body {
+  overflow-x: hidden;
+}
